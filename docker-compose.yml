@@ -1,0 +1,18 @@
+version: '2'
+services:
+    server:
+        build:  server/
+        command: nodemon ./server.js
+        ports:
+            - "8001:8001"
+        environment:
+            - NODE_ENV=development
+            - CHOKIDAR_USEPOLLING=true
+    client:
+        build: ./client/
+        command: npm start
+        depends_on:
+            - server
+        ports:
+            - "3000:3000"
+        
