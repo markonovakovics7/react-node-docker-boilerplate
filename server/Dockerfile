@@ -1,9 +1,10 @@
 FROM node:12.10.0-alpine
 
-WORKDIR /server/
+WORKDIR /usr/app
 
 COPY package*.json ./
-RUN npm install
+
+RUN npm install 
 
 COPY . .
 

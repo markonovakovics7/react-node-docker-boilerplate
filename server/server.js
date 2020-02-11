@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 
 // Constants
-const PORT = process.env.PORT || 8001;
-const HOST = '0.0.0.0';
+
 
 //const CLIENT_BUILD_PATH = path.join(__dirname, '../../client/build');
 
@@ -14,6 +13,13 @@ const app = express();
 //app.use(express.static(CLIENT_BUILD_PATH));
 
 // API
+app.get('/', (req, res) => {
+  res.set('Content-Type', 'application/json');
+  let data = {
+    message: 'Test!!!!'
+  };
+  res.send(JSON.stringify(data, null, 2));
+});
 app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   let data = {
@@ -27,5 +33,8 @@ app.get('/api', (req, res) => {
   response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
 }); */
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+
+var server = app.listen(8001, function(){
+  var port = server.address().port;
+  console.log("Server started at http://localhost:%s", port);
+});
